@@ -6,7 +6,7 @@
  * Time: 11:21 AM
  */
 
-namespace App\Services\WeatherService\Contracts;
+namespace Erekle\Weather\Contracts;
 
 
 interface WeatherInterface

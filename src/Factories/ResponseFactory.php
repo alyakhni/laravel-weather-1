@@ -6,7 +6,7 @@
  * Time: 2:25 PM
  */
 
-namespace App\Services\WeatherService\Factories;
+namespace Erekle\Weather\Factories;
 
 
 use App\Services\WeatherService\Responses\ApixuResponse;

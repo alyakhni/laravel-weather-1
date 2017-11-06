@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\WeatherService\Contracts;
+namespace Erekle\Weather\Contracts;
 
 
 /**

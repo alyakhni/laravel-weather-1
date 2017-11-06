@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\WeatherService\Responses;
+namespace Erekle\Weather\Responses;
 
 class ApixuResponse
 {

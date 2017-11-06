@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace Erekle\Weather;
 
-use App\Services\WeatherService\Contracts\WeatherInterface;
-use App\Services\WeatherService\Responses\WeatherManager;
+use Erekle\Weather\Contracts\WeatherInterface;
+use Erekle\Weather\Responses\WeatherManager;
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,7 +21,9 @@ class WeatherServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
+        $this->publishes([
+            __DIR__.'/../config/mongo.php' => config_path('mongo.php'),
+        ], 'mongo');
     }
 
     /**
