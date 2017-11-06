@@ -1,0 +1,11 @@
+{
+    "name": "kereselidze/weather",
+    "description": "Weather Api",
+    "authors": [
+        {
+            "name": "erekle",
+            "email": "erekle.k1@gmail.com"
+        }
+    ],
+    "require": {}
+}
