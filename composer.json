@@ -1,11 +1,36 @@
 {
-    "name": "kereselidze/weather",
-    "description": "Weather Api",
-    "authors": [
-        {
-            "name": "erekle",
-            "email": "erekle.k1@gmail.com"
-        }
-    ],
-    "require": {}
+  "name": "erekle/weather",
+  "description": "Weather Api",
+  "homepage": "https://github.com/erekle1/laravel-weather",
+  "keywords": [
+    "laravel-weather",
+    "php-weather",
+    "laravel"
+  ],
+  "authors": [
+    {
+      "name": "erekle",
+      "email": "erekle.k1@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7",
+    "illuminate/support": "5.5.*",
+    "guzzlehttp/guzzle": "6.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Erekle\\Weather\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Erekle\\Weather\\WeatherServiceProvider"
+      ],
+      "aliases": {
+        "Weather": "Erekle\\Weather\\Facades\\Weather"
+      }
+    }
+  }
 }
