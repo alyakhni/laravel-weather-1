@@ -22,8 +22,8 @@ class WeatherServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/mongo.php' => config_path('mongo.php'),
-        ], 'mongo');
+            __DIR__.'/../config/weather.php' => config_path('weather.php'),
+        ], 'weather');
     }
 
     /**

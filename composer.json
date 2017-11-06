@@ -42,5 +42,7 @@
         "Weather": "Erekle\\Weather\\Facades\\Weather"
       }
     }
-  }
+  },
+  "minimum-stability": "dev"
+
 }
