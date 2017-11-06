@@ -3,7 +3,7 @@
 namespace Erekle\Weather\Responses;
 
 
-use App\Services\WeatherService\Factories\ResponseFactory;
+use Erekle\Weather\Factories\ResponseFactory;
 use GuzzleHttp\Client;
 
 /**
@@ -30,7 +30,6 @@ class WeatherManager
         $this->api = ResponseFactory::build($this->serviceName, $config, $client);
 
     }
-
 
 
     public function __call($name, $arguments)

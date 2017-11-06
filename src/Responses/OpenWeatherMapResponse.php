@@ -2,8 +2,8 @@
 
 namespace Erekle\Weather\Responses;
 
-use App\Services\WeatherService\Contracts\WeatherResponseInterface;
 use Carbon\Carbon;
+use Erekle\Weather\Contracts\WeatherResponseInterface;
 
 class OpenWeatherMapResponse implements WeatherResponseInterface
 {

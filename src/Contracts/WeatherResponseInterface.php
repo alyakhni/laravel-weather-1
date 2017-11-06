@@ -37,10 +37,6 @@ interface WeatherResponseInterface
      */
     public function byZipCode($zipCode, $countryCode);
 
-//    /**
-//     * @param $cityName
-//     * @return mixed
-//     */
-//    public function getCurrentWeather($cityName);
+
 
 }
