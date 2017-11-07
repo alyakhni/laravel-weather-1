@@ -21,7 +21,8 @@
   },
   "require-dev": {
     "mockery/mockery": "^0.9.4",
-    "phpunit/phpunit": "^6.4"
+    "phpunit/phpunit": "^6.4",
+    "orchestra/testbench": "~3.0"
   },
   "autoload": {
     "psr-4": {
@@ -30,7 +31,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Erekle\\Weather\\Test\\": "tests/"
+      "Erekle\\Weather\\Tests\\": "tests/"
     }
   },
   "extra": {

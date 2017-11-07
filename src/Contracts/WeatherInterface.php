@@ -12,7 +12,5 @@ namespace Erekle\Weather\Contracts;
 interface WeatherInterface
 {
 
-    public function byCityName($cityName);
 
-    public function byZipCode($zipCode, $countryCode);
 }

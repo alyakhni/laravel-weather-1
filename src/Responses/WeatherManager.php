@@ -3,6 +3,7 @@
 namespace Erekle\Weather\Responses;
 
 
+use Erekle\Weather\Contracts\WeatherInterface;
 use Erekle\Weather\Factories\ResponseFactory;
 use GuzzleHttp\Client;
 
@@ -10,7 +11,7 @@ use GuzzleHttp\Client;
  * Class Response
  * @package App\Services\WeatherService\Responses
  */
-class WeatherManager
+class WeatherManager implements WeatherInterface
 {
 
     private $config;

@@ -33,7 +33,7 @@ class WeatherServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(WeatherInterface::class, function ($app) {
+        $this->app->singleton('Erekle\\Weather\\Contracts\\WeatherInterface', function ($app) {
 
             $default = $app->config['weather.default'];
 

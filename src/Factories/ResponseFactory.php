@@ -9,8 +9,8 @@
 namespace Erekle\Weather\Factories;
 
 
-use App\Services\WeatherService\Responses\ApixuResponse;
-use App\Services\WeatherService\Responses\OpenWeatherMapResponse;
+use Erekle\Weather\Responses\ApixuResponse;
+use Erekle\Weather\Responses\OpenWeatherMapResponse;
 use GuzzleHttp\Client;
 
 class ResponseFactory
