@@ -10,6 +10,6 @@ class Weather extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Erekle\\Weather\\Contracts\\WeatherInterface';
+        return Weather::class;
     }
 }

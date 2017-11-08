@@ -10,7 +10,6 @@ use Illuminate\Support\ServiceProvider;
 class WeatherServiceProvider extends ServiceProvider
 {
 
-    protected $defer = TRUE;
 
     /**
      * Bootstrap the application services.
@@ -33,7 +32,8 @@ class WeatherServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('Erekle\\Weather\\Contracts\\WeatherInterface', function ($app) {
+
+        $this->app->singleton(WeatherInterface::class, function ($app) {
 
             $default = $app->config['weather.default'];
 
@@ -41,6 +41,8 @@ class WeatherServiceProvider extends ServiceProvider
 
             return new WeatherManager($config, new Client());
         });
+
+
     }
 
 

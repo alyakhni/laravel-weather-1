@@ -12,5 +12,5 @@ namespace Erekle\Weather\Contracts;
 interface WeatherInterface
 {
 
-
+    public function ssss();
 }
