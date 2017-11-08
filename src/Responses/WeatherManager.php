@@ -25,7 +25,6 @@ class WeatherManager implements WeatherInterface
 
     function __construct($config, Client $client)
     {
-
         $this->config      = $config;
         $this->serviceName = $this->config['driver'];
 
@@ -33,13 +32,10 @@ class WeatherManager implements WeatherInterface
 
     }
 
-    public function ssss()
-    {
-        
-    }
+
     public function __call($name, $arguments)
     {
-        return $this->api->$name($arguments[0]);
+        return call_user_func_array([$this->api, $name], $arguments);
     }
 
 

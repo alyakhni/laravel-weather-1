@@ -27,7 +27,10 @@
   "autoload": {
     "psr-4": {
       "Erekle\\Weather\\": "src/"
-    }
+    },
+    "classmap": [
+      "src/WeatherServiceProvider.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
@@ -47,6 +50,6 @@
       }
     }
   },
-  "minimum-stability": "dev"
-
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }

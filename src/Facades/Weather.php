@@ -4,12 +4,15 @@
 namespace Erekle\Weather\Facades;
 
 
+use Erekle\Weather\Contracts\WeatherInterface;
 use Illuminate\Support\Facades\Facade;
 
 class Weather extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return Weather::class;
+
+
+        return WeatherInterface::class;
     }
 }
