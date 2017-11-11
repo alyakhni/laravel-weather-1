@@ -11,7 +11,7 @@ Erekle\Weather\WeatherServiceProvider::class,
 ```
 You can use the facade for shorter code. Add this to your aliases:
 
-```bash
+```bash 
 'Weather' => Erekle\Weather\Facades\Weather::class,
 ```
  To publish the config settings in Laravel 5 use:
@@ -19,5 +19,10 @@ You can use the facade for shorter code. Add this to your aliases:
  php artisan vendor:publish --provider="Erekle\Weather\WeatherServiceProvider::class"
  ```
 This will add an weather.php config file to your config folder.
+##Usage
+Get current weather by default values, these are  in config/weather.php.
 
+ ```bash
+$currentWeather = Weather::get();
+ ```
 
