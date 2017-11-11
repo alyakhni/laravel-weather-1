@@ -12,11 +12,14 @@ class City
 
     public $latitude;
 
-    function __construct($id, $name, $longitude, $latitude)
+    public $country;
+
+    function __construct($id, $name, $longitude, $latitude, $country)
     {
         $this->id        = $id;
         $this->name      = $name;
         $this->longitude = $longitude;
         $this->latitude  = $latitude;
+        $this->country   = $country;
     }
 }

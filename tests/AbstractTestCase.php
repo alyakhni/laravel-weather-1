@@ -27,7 +27,14 @@ abstract class AbstractTestCase extends TestCase
     public function setUp()
     {
         parent::setUp();
-
+//        $config = [
+//            'sitemap.use_cache'      => FALSE,
+//            'sitemap.cache_key'      => 'Laravel.Sitemap.',
+//            'sitemap.cache_duration' => 3600,
+//            'sitemap.testing'        => TRUE
+//        ];
+//        config($config);
+        $this->weather = resolve(WeatherInterface::class);
     }
 
 

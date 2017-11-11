@@ -8,31 +8,13 @@
 
 namespace Erekle\Weather\Traits;
 
-use Carbon\Carbon;
+use Erekle\Weather\Resources\City;
 
 trait ResponseTrait
 {
     abstract function setCity();
 
-    protected function weatherSerialize($weather)
-    {
-
-        $currentWeather = $weather;
-        $weatherArray   = [];
-        if (isset($currentWeather->dt_txt)) {
-            $weatherArray['date'] = $currentWeather->dt_txt;
-
-        }
-        $weatherArray['temp']     = $currentWeather->main->temp;
-        $weatherArray['temp_min'] = $currentWeather->main->temp_min;
-        $weatherArray['temp_max'] = $currentWeather->main->temp_max;
-        $weatherArray['info']     = $currentWeather->weather[0];
-        $weatherArray['icon']     = "http://openweathermap.org/img/w/" . $currentWeather->weather[0]->icon .
-                                    ".png";
-
-        return collect($weatherArray);
-
-    }
+    abstract function getCity();
 
     public function getByCityNameAndCountryCode($cityName, $countryCode)
     {
@@ -43,80 +25,6 @@ trait ResponseTrait
         $this->response = json_decode($response->getBody()->getContents());
 
         return $this;
-    }
-
-    public function getWeather($dayNumb = 5)
-    {
-        $this->getWeatherResponseByProperties();
-        $data                     = $this->response;
-        $listWeathers             = $data->list;
-        $city                     = $data->city;
-        $weatherArrays['city']    = $this;
-        $weatherArrays['country'] = $city->country;
-        $now                      = Carbon::now();
-        $current                  = json_decode($this->getWeatherDataResponse(['q' => "{$city->name}"],
-            TRUE)->getBody()->getContents());
-        $current                  = $this->weatherSerialize($current);
-        $current['city']          = $city->name;
-        $current['country']       = $city->country;
-        $weatherArrays['current'] = (object)$current;
-
-
-        foreach ($listWeathers as $listWeather) {
-            for ($i = 0; $i < $dayNumb; $i++) {
-                $weatherDate = Carbon::createFromTimestamp($listWeather->dt);
-
-                if ($weatherDate->diffInDays($now) == $i) {
-                    $weather                          = $this->weatherSerialize($listWeather);
-                    $weatherArrays['days'][$i]['day'] = $weatherDate->format('l');
-                    $weatherArrays['days'][$i][]      = collect($weather);
-                }
-            }
-        }
-        $this->weather = collect($weatherArrays);
-
-        return $this;
-    }
-
-    protected function getWeatherResponseByProperties()
-    {
-        if (!is_null($this->countryCode)) {
-
-            if (!is_null($this->cityName)) {
-                $this->getByCityNameAndCountryCode($this->cityName, $this->countryCode);
-
-                return;
-            }
-            if (!is_null($this->zipCode)) {
-                return $this->byZipCode($this->zipCode, $this->countryCode);
-            }
-        } elseif (!is_null($this->cityId)) {
-            return $this->byCityId($this->cityId);
-        } elseif (!is_null($this->cityName)) {
-
-            $this->byCityName($this->cityName);
-
-            return;
-
-        }
-
-        return $this->byDefault();
-    }
-
-    protected function byDefault()
-    {
-        $defaultCityName    = config('weather.city_name');
-        $defaultCountryCode = config('weather.country_code');
-        $response           = $this->getWeatherDataResponse(['q' => "{$defaultCityName},{$defaultCountryCode}"]);
-        $this->response     = json_decode($response->getBody()->getContents());
-
-        return $this;
-
-    }
-
-    public function getApiVersion()
-    {
-        return $this->apiVersion;
     }
 
     public function getWeatherDataResponse($parameters = [], $isCurrent = FALSE)
@@ -131,6 +39,61 @@ trait ResponseTrait
         $response = $this->httpClient->request('GET', $endpoint, ['query' => $parameters]);
 
         return $response;
+    }
+
+    public function getApiVersion()
+    {
+        return $this->apiVersion;
+    }
+
+    protected function weatherSerialize($data, $current = FALSE)
+    {
+
+        $weatherArray = [];
+        $main = $data->main;
+        $weathers = $data->weather;
+        if (!$current) {
+            if (isset($currentWeather->dt_txt)) {
+                $weatherArray['date'] = $data->dt_txt;
+
+            }
+            $weatherArray['temp'] = $data->main->temp;
+            $weatherArray['temp_min'] = $data->main->temp_min;
+            $weatherArray['temp_max'] = $data->main->temp_max;
+            $weatherArray['info'] = $data->weather[0];
+            $weatherArray['icon'] = "http://openweathermap.org/img/w/" . $data->weather[0]->icon .
+                ".png";
+
+            return collect($weatherArray);
+        } else {
+            $city = new City($data->id, $data->name, $data->coord->lon, $data->coord->lat, $data->sys->country);
+            $this->setCity($city);
+            $weatherArray['city'] = $this->getCity();
+
+            $weatherArray['temperature'] = $main->temp;
+            $weatherArray['temperature_max'] = $main->temp_max;
+            $weatherArray['temperature_min'] = $main->temp_min;
+            $weatherArray['pressure'] = $main->pressure;
+            foreach ($weathers as $key => $weather) {
+                $weatherArray['weathers'][$key]['main'] = $weather->main;
+                $weatherArray['weathers'][$key]['description'] = $weather->description;
+                $weatherArray['weathers'][$key]['icon'] = $weather->icon;
+            }
+
+
+            return collect($weatherArray);
+
+        }
+    }
+
+    protected function byDefault()
+    {
+        $defaultCityName = config('weather.city_name');
+        $defaultCountryCode = config('weather.country_code');
+        $response = $this->getWeatherDataResponse(['q' => "{$defaultCityName},{$defaultCountryCode}"]);
+        $this->response = json_decode($response->getBody()->getContents());
+
+        return $this;
     }
 
 }
