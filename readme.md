@@ -19,10 +19,10 @@ You can use the facade for shorter code. Add this to your aliases:
  php artisan vendor:publish --provider="Erekle\Weather\WeatherServiceProvider::class"
  ```
 This will add an weather.php config file to your config folder.
-##Usage
+
+## Usage
 Get current weather by default values, these are  in config/weather.php.
 
  ```bash
 $currentWeather = Weather::get();
  ```
-
