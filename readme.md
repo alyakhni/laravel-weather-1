@@ -1,6 +1,6 @@
 # **Laravel Weather** 
 
-## Installation
+## Installation Guide
 Require this package in your composer.json and update composer.
 ```bash
 composer require erekle/weather
